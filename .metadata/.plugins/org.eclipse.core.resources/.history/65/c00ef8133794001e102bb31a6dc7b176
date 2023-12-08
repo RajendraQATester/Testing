@@ -1,0 +1,64 @@
+package com.OrangeHRMTestCases;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import com.BaseTest.OHRMBaseTest;
+
+public class LoginTest extends OHRMBaseTest {
+
+	 public void Logincredentials()
+	 {
+		 
+
+			String userNameTestData="rajii";
+			//By userNameProperty=By.id("txtUsername"); 
+			
+			// //*[@id="txtUsername"]
+			driver.findElement(By.xpath(//*[@id="txtUsername"])).sendKeys(userNameTestData);
+			
+			//WebElement userName=driver.findElement(userNameProperty);
+
+			// Operation should be performed on the element - userName
+			//userName.sendKeys(userNameTestData);
+
+			// Identifying properties of Password Element
+			// <input name="txtPassword" autocomplete="off" type="password">
+
+			 
+			String passwordTestData="Rajii@5999";
+
+			// identify the property of Password Element
+			//By passwordProperty=By.name("txtPassword");
+			// identifying the element password with its property
+			//WebElement password=driver.findElement(passwordProperty);
+			
+			//   //*[@id="txtPassword"]
+			
+			driver.findElement(By.xpath(//*[@id="txtPassword"])).sendKeys(passwordTestData);
+			
+			// Performing an operation on the WebElement Password
+			//password.sendKeys(passwordTestData);
+
+		  	
+			//   //*[@id="btnLogin"]		
+					
+					driver.findElement(By.xpath(//*[@id="btnLogin"])).click();	
+							
+							
+			// <input type="submit"  class="button"  value="LOGIN">
+			//By logInButtonProperty=By.className("button");
+			//WebElement logInButton=driver.findElement(logInButtonProperty);
+			//logInButton.click();
+
+
+		 
+		 
+		 
+		 
+	 }
+	
+}
+
+
+

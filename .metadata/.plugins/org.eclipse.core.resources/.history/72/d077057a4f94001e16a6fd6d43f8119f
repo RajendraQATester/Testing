@@ -1,0 +1,18 @@
+package com.Xpath;
+
+import org.openqa.selenium.By;
+
+public class HomePageXpath extends LoginTestXpath
+{
+	public void OHRMHomePage()
+	{
+		
+		//   //tagname[contains(text(),'partialtextvalue')]
+		
+		
+		//  //*[@id="welcome"]
+		 driver.findElement(By.xpath("//*[contains(text()'Welcome'])")).click();	
+		
+	}
+
+}

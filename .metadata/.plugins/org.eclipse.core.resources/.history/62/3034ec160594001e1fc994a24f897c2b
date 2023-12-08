@@ -1,0 +1,201 @@
+package com.OHRM;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+
+public class OHRMHomePageMouseHoverAction extends BaseTest {
+
+	
+		public void OHRMLoginpagewithValidation()  // UserDefined Method for  validating URl Address
+		{
+			
+		String ExpectedURLAddress="orangehrm-4.2.0.1";
+		System.out.println("The Expected URL address of OrangeHRM Login is : "+ExpectedURLAddress);
+
+		
+		String ActualUrlAddress=driver.getCurrentUrl();
+		System.out.println("The Actual Url Address of OrangeHRM login page is : "+ActualUrlAddress);
+
+		
+		if(ActualUrlAddress.contains(ExpectedURLAddress))
+		{
+		System.out.println("The actual URL address is matched with Expected Url Address : PASS");
+		}
+		else
+		{
+		System.out.println("The actual URL address is not Matched with Expected Url Address : FAIL");
+		}	
+	}
+	  public void LoginPanelText() throws IOException  // UserDefined method for Validation of Login Panel Text 
+	  
+	   {
+		   FileInputStream stream=new FileInputStream("./src/com/OHRMExcel/AddEmployee.xlsx");
+		   XSSFWorkbook workbook=new XSSFWorkbook(stream);
+		   XSSFSheet sheet= workbook.getSheet("Sheet1");
+
+		   XSSFRow row=sheet.getRow(1);
+		   XSSFCell cell=row.getCell(0);
+		      String  LoginPanelTestData=cell.getStringCellValue();
+
+		   String ExpectedLoginPageText=LoginPanelTestData;
+		   System.out.println("The login page should contains text -"+ExpectedLoginPageText);
+		   
+		   //<div id="logInPanelHeading">LOGIN Panel</div>
+		   
+		  /* By LoginPanelProperty=By.id("logInPanelHeading");
+		   WebElement LoginPanel=driver.findElement(LoginPanelProperty);
+		   String ActualLoginPageText=LoginPanel.getText(); */
+		   
+		   //  Finding Element by id and getting panel text from id and storing it in a variable
+		   
+		   String ActualLoginPageText= driver.findElement(By.id("logInPanelHeading")).getText();
+		
+
+			String ActualLoginText=ActualLoginPageText;
+			 XSSFCell loginPanel=row.createCell(1);
+			   loginPanel.setCellValue(ActualLoginPageText);
+			System.out.println("The Actual LoginText of OrangeHRM login page is : "+ActualLoginText);
+
+			
+			if(ActualLoginText.contains(ExpectedLoginPageText))
+			{
+			System.out.println("The actual LoginPanel text is matched with Expected LoginPanel Text : PASS");
+			}
+			else
+			{
+			System.out.println("The actual LoginPanel text is not matched with Expected LoginPanel Text : FAIL");
+			
+			//XSSFCell loginpanelResult=row.createCell(2);
+			  // loginPanel.setCellValue(ActualLoginPageText);
+			
+			}	
+			 
+		  FileOutputStream OHRMLogInTestResultFile = new FileOutputStream("./src/com/OHRMExcel/AddEmployee.xlsx");
+			workbook.write(OHRMLogInTestResultFile); 
+
+		}
+		   
+		   
+		  
+		   
+	  public void LoginCredentials() throws IOException   // UserDefined method for Validation of Login Credentials 
+	  {
+		  FileInputStream stream=new FileInputStream("./src/com/OHRMExcel/AddEmployee.xlsx");
+		   XSSFWorkbook workbook=new XSSFWorkbook(stream);
+		   XSSFSheet sheet= workbook.getSheet("Sheet1");
+		   XSSFRow row=sheet.getRow(1);
+		
+		  				XSSFCell logInTestDataRowOfUserNameCell=row.getCell(6);
+
+					String userNameTestData=logInTestDataRowOfUserNameCell.getStringCellValue();
+				
+					driver.findElement(By.id("txtUsername")).sendKeys(userNameTestData);  //Finding Element property and sending keys
+				
+					XSSFCell logInTestDataRowOfPasswordCell=row.getCell(7);
+					String passwordTestData=logInTestDataRowOfPasswordCell.getStringCellValue();
+
+					//String passwordTestData="Rajii@5999";
+
+					// identify the property of Password Element
+					/*By passwordProperty=By.name("txtPassword");
+					// identifying the element password with its property
+					WebElement password=driver.findElement(passwordProperty);
+					// Performing an operation on the WebElement Password
+					password.sendKeys(passwordTestData);*/
+        driver.findElement(By.name("txtPassword")).sendKeys(passwordTestData);   //Finding Element property and sending keys
+					// <input type="submit"  class="button"  value="LOGIN">
+					 /*By logInButtonProperty=By.className("button");
+					WebElement logInButton=driver.findElement(logInButtonProperty);
+					logInButton.click(); */
+	    driver.findElement(By.className("button")).click();  //Finding Element property and performing Click operation
+	    
+	    File OHRMHomePageShot=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+	    FileUtils.copyFile(OHRMHomePageShot, new File("./src/OHRM Screenshots/OHRMHome.png"));
+
+		// Validating OrangeHRM HomePage
+		String expected_OrangeHRMApplicationHomePageText="Admin";
+		System.out.println(" The Expected Text of OrangeHRM Application HomePage is :- "+expected_OrangeHRMApplicationHomePageText);
+
+		// id="welcome" - Property of WelCome Admin Element
+		/*By welComeAdminProperty=By.id("welcome");
+		WebElement welComeAdminTest=driver.findElement(welComeAdminProperty);
+	WebElement welComeAdmin=driver.findElement(welComeAdminProperty);
+		String actual_OrangeHRMApplicationHomePageText=welComeAdmin.getText(); */
+		
+		String actual_OrangeHRMApplicationHomePageText=driver.findElement(By.id("welcome")).getText();
+		
+		
+		System.out.println(" The actual Text of OrangeHRM Application HomePage is :- "+actual_OrangeHRMApplicationHomePageText);
+
+
+		// Validating HomePage
+		if(actual_OrangeHRMApplicationHomePageText.contains(expected_OrangeHRMApplicationHomePageText))
+		{
+		System.out.println(" Succesfully Navigated to OrangeHRM Application HomePage - PASS");
+		
+
+		driver.findElement(By.partialLinkText("Admin")).click();
+		//welComeAdmin.click();
+		
+By logOutProperty=By.linkText("Logout");
+
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(logOutProperty));
+
+		WebElement logOut=driver.findElement(logOutProperty);
+		logOut.click();
+		}
+		else
+		{
+		System.out.println(" Failed to Navigate to OrangeHRM Application HomePage - FAIL");
+		
+
+		}
+		
+	}
+	public void PIMClick()  //User Defined Method for PIM MouseClick Over
+	
+	{	  
+		// id="menu_pim_viewPimModule" // /html/body/div[1]/div[2]/ul/li[2]/a/b
+		
+	By PIMProperty=By.id("menu_pim_viewPimModule");
+		WebElement PIM=driver.findElement(PIMProperty);  
+
+		
+
+		Actions PIMMouseHover = new Actions(driver);
+		
+		PIMMouseHover.moveToElement(PIM).build().perform();
+		
+	}
+		public static void main(String[] args) throws IOException  {
+
+			OHRMHomePageMouseHoverAction MouseHoverAction = new OHRMHomePageMouseHoverAction();
+			MouseHoverAction.setup();
+			MouseHoverAction.OHRMLoginpagewithValidation();
+			MouseHoverAction.LoginPanelText();
+			MouseHoverAction.LoginCredentials();
+			MouseHoverAction.PIMClick();
+			// MouseHoverAction.teardown();
+	}
+	}
+	
+
+

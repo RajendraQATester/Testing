@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="for(int rowOfIndex=1;rowOfIndex&lt;=36;rowOfIndex++)"/>
+		<list key="findhistory">
+			<item value="for(int rowOfIndex=1;rowOfIndex&lt;=36;rowOfIndex++)"/>
+			<item value="for(Cell cell : row) { "/>
+			<item value="XSSFRow LogInTestDataRow=logInTestDataSheet.getRow(3);"/>
+		</list>
+	</section>
+</section>

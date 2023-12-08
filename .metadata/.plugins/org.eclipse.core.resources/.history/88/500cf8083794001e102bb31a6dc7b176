@@ -1,0 +1,12 @@
+package com.OrangeHRMTestCases;
+
+import com.BaseTest.OHRMBaseTest;
+
+public class LoginTest extends OHRMBaseTest {
+
+	
+	
+}
+
+
+
